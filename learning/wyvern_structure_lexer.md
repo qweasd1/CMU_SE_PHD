@@ -15,7 +15,7 @@
   * [TODO] find the facade method of it
   * [TODO] find a general method to read this file
   * [?] Is there any graph tool to show Copper grammar to graph?
-  * [?] how do we handle the following left-recursive grammar?
+  * [?] how do we handle the following left-recursive grammar? (<start> (<next>)* ?)
   ```
   lineElementSequence ::= indent_t:n {: RESULT = makeList(n); :}
 	                      | nonWSLineElement:n {:
