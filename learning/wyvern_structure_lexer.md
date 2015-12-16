@@ -2,7 +2,7 @@
 * [?]: question
 * [?<]: minor question
 * [TODO]
-* [@TODO]: important TODO
+* [TODO>]: important TODO
 * [Mark]: some information catch attenson
 
 
@@ -56,7 +56,7 @@ if (newIndent.startsWith(currentIndent)) {
 				throw new CopperParserException("Illegal indent at line "+tokenLoc.beginLine+": not a superset of previous indent level");
 			}
 ```
-  * [@TODO]: write a digram of the lexerGrammar
+  * [TODO>]: write a digram of the lexerGrammar
   * 
   
 ### Task
