@@ -2,6 +2,7 @@
 * [?]: question
 * [?<]: minor question
 * [TODO]
+* [@TODO]: important TODO
 * [Mark]: some information catch attenson
 
 
@@ -28,6 +29,24 @@
   * [Mark] LexerUtils.isSpecial(..): $root\tools\src\wyvern\tools\lexing\LexerUtils.java  | return true when the token is SINGLE_LINE_COMMENT, MULTI_LINE_COMMENT, WHITESPACE
   * [Mark] Token definition namespace: wyvern.tools.parsing.coreparser.WyvernParserConstants
   * [?] Token.image : what's this mean?
+  * [?] program: what does the incomplete line mean in #branch2?
+```
+program ::= lines:p {:
+	             	RESULT = p;
+	             	Token t = ((LinkedList<Token>)p).getLast();
+	             	RESULT.addAll(possibleDedentList(t));
+	           	:}
+	          | lines:p lineElementSequence:list {:
+	          		//#branch2 handle the case of ending in an incomplete line
+	          		RESULT = p;
+	          		List<Token> adjustedList = adjustLogicalLine((LinkedList<Token>)list);
+	          		RESULT.addAll(adjustedList);
+	             	Token t = ((LinkedList<Token>)adjustedList).getLast();
+	          		RESULT.addAll(possibleDedentList(t));
+	          	:}
+	          | lineElementSequence:list {: RESULT = list; :} // a single-line program with no carriage return
+	          | /* empty program */ {: RESULT = emptyList(); :};
+```
   * [?<] lexerGrammar: adjustIndent in ident bracn, what's the meaning of following:
 ```
 if (newIndent.startsWith(currentIndent)) {
@@ -37,6 +56,8 @@ if (newIndent.startsWith(currentIndent)) {
 				throw new CopperParserException("Illegal indent at line "+tokenLoc.beginLine+": not a superset of previous indent level");
 			}
 ```
+  * [@TODO]: write a digram of the lexerGrammar
+  * 
   
 ### Task
 * CopperComposer: $Root\tools\copper-composer
