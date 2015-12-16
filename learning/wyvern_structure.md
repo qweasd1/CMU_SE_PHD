@@ -29,7 +29,7 @@
   * [Mark] LexerUtils.isSpecial(..): $root\tools\src\wyvern\tools\lexing\LexerUtils.java  | return true when the token is SINGLE_LINE_COMMENT, MULTI_LINE_COMMENT, WHITESPACE
   * [Mark] Token definition namespace: wyvern.tools.parsing.coreparser.WyvernParserConstants
   * [?] Token.image : what's this mean?
-  * [?] program: what does the incomplete line mean in #branch2?
+  * [?] program: what does the incomplete line mean in #branch2? (to compatible with no newline case?)
 ```
 program ::= lines:p {:
 	             	RESULT = p;
