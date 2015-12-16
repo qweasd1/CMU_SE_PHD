@@ -1,3 +1,10 @@
+### Notation
+* [?]: question
+* [?<]: minor question
+* [TODO]
+* [Mark]: some information catch attenson
+
+
 ### Notes
 * quote language: $root\tools\src\wyvern\tools\parsing\quotelang
 
@@ -18,7 +25,18 @@
 	                        :}
 	                      | lineElementSequence:list anyLineElement:n {: list.addAll(n); RESULT = list; :};
   ```
-  * [Mark] LexerUtils.isSpecial(..): $root\tools\src\wyvern\tools\lexing\LexerUtils.java
+  * [Mark] LexerUtils.isSpecial(..): $root\tools\src\wyvern\tools\lexing\LexerUtils.java  | return true when the token is SINGLE_LINE_COMMENT, MULTI_LINE_COMMENT, WHITESPACE
+  * [Mark] Token definition namespace: wyvern.tools.parsing.coreparser.WyvernParserConstants
+  * [?] Token.image : what's this mean?
+  * [?<] lexerGrammar: adjustIndent in ident bracn, what's the meaning of following:
+```
+if (newIndent.startsWith(currentIndent)) {
+				indents.push(newIndent);
+				return 1;
+			} else {
+				throw new CopperParserException("Illegal indent at line "+tokenLoc.beginLine+": not a superset of previous indent level");
+			}
+```
   
 ### Task
 * CopperComposer: $Root\tools\copper-composer
