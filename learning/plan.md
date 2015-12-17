@@ -5,3 +5,4 @@
 
 ### Strategy
 * find the core class which connect and contruct the whole architecture of the Wyvern
+* split new keywords or elements with old ones to better understand
