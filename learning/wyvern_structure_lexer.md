@@ -64,3 +64,8 @@ if (newIndent.startsWith(currentIndent)) {
   * [TODO| copper's Java API]: what does it do? (compose host language with extension language ? see details)
   * [main class] : ParserBean(is it a in-memory representation for a Copper parser meta data?)
 
+### Token Reference
+* ARROW : "=>"
+* TARROW: "->"
+* POUND: "#"
+* DASH: '-'
