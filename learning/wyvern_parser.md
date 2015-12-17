@@ -8,13 +8,17 @@
 * [?>]how to set token_source for WyvernParser(line 49)?
 * functions:
   * freshName(): create anonymous variable name
+  * invocation() : '+-*/'
 
 ##### ASTBuilder
 * qualifiedName: wyvern.tools.parsing.coreparser.ASTBuilder
 * position : $Root\tools\src\wyvern\tools\parsing\coreparser\ASTBuilder.java
 * purpose: used to build ast
-* [?>]: what does tagInfo(...) mean?
-* [?>]: what does setNewBody(...) mean? | build.setNewBody(flags.getNewExp(), decls) // #ln:376
+* method:
+  * [?>] what does tagInfo(...) mean?
+  * [?>] what does setNewBody(...) mean? | build.setNewBody(flags.getNewExp(), decls) // #ln:376
+  * [?]  fn() : single parameter lambda expression
+  * LambdaFn: lambda expression : #(a:t1,b:t2)=> <expr>
 
 ##### Others
 * wyvern.tools.errors.FileLocation : $Root\tools\src\wyvern\tools\errors
@@ -28,6 +32,11 @@
 
 ##### components
 * Expression:
+  * normal expression (left-factor)
+    * AdditiveExpression : '+' '-'
+    * MultiplicativeExpression: '*' '/' '%'(Mod) 
+  * single parameter lambda expression
+  * multi parameter lambda expression
 * ExpressionLine: a wrapper for Expression and pattern match
   * normal expression: <expr> + sub expr
   * pattern match (no default, only match type by now)
