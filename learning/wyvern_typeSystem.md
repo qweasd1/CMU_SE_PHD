@@ -1,3 +1,15 @@
+## Stategy
+### How TypedAST generated? (the process sequence)
+
+
+
+## Types
+* Type: Root
+  * subclasses:
+      * Unit: NULLObject of Type 
+
+
+
 ## Core classes
 
 ### Binding
@@ -15,11 +27,20 @@
   * EvaluationBinding: 
   
 
+### expression: $Root\tools\src\wyvern\tools\typedAST\core\expressions
 
 
 
-
-### Core $Root\tools\src\wyvern\tools\typedAST\interfaces
-* TypedAST the root object of all AST
+## Basic Interfaces:  $Root\tools\src\wyvern\tools\typedAST\interfaces
+* ```TypedAST```: the root object of all AST
   * position:  TypedAST.java
-  * purpose 
+  * [?>]purpose : typecheck(Environment env, Optional<Type> expected), getType(), Expression generateIL(GenContext ctx), CallableExprGenerator getCallableExpr(GenContext ctx);
+  * methods: 
+      * Expression generateIL(GenContext ctx) : generate wyvernIL code from current AST 
+  * subclasses: 
+      * ```CoreAst```: just can accept CoreASTVisitor
+      * 
+* ```Value``` : just a sub domain root
+* ```Sequence``` extends AbstractTypedAST implements CoreAST, Iterable<TypedAST> : 
+  * purpose: used to create the sequence 
+
