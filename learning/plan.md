@@ -8,6 +8,6 @@
 * split new keywords or elements with old ones to better understand
 * type-checking:
   * find a whole workflow to better understand the components 
-
+* [TODO>] find how to map TypedAST to WyvernILAST 
 ### Assistant
 * write plugins for javacc and copper using xtext to better edit them
