@@ -32,7 +32,7 @@ AST Declaration(boolean inModule) :
   exp = Instantiation() {return exp; }
 }
 ```
-##### I added a new Declaration Ast called TypeAbbrevDeclaration and its doExtend logic like the following:
+##### I added a new Declaration Ast called ```TypeAbbrevDeclaration``` and its ```doExtend(...)``` logic like the following:
 ```java
   protected Environment doExtend(Environment old, Environment against) {
 		return old.extend(new TypeBinding(alias, resolveReferenceType(old)));
@@ -43,7 +43,7 @@ AST Declaration(boolean inModule) :
 		return resolved_type;
 	}
 ```
-What I did here is let TypeResolver reolve the real type object of the UnresolvedType and let alias bind to the realType in our ```Environment```. So when the following sequence declaration use the alias name, the can lookup the realType in ```Environment```.
+What I did here is let TypeResolver reolve the real type object of the UnresolvedType and let alias bind to the realType in our ```Environment```. So when the following sequence declaration use the alias type name, they can lookup the realType in ```Environment```.
 
 ##### I then added a new unit test in CoreParserTests.java
 ```java
@@ -62,8 +62,8 @@ What I did here is let TypeResolver reolve the real type object of the Unresolve
 		
 	}
 ```
-The test works fine. My trouble came when I want to let ```ILTests.testTypeAbbrev()```. I check the logic and find we don't call ```tpyecheck(...)``` method on ```TypedAst``` here. What we did is call the ```generateIL()``` here. 
+The test works fine. My trouble came when I want to let ```ILTests.testTypeAbbrev()``` pass. I check the logic and find we don't call ```tpyecheck(...)``` method on ```TypedAst``` here. What we did is call the ```generateIL(...)``` here. 
 
-I want to use the same solution I used in ```TypeAST.typecheck()```, however, the environment object we work with here is the ```GenContext``` and its subType ```TypeGenContext``` which works as a type binder looks strange to me. I hope it can have a function like ```CoreWyvernIL.ValueType lookupType(string typeName)```. But seems it doesn't have.
+I want to use the same solution I used before. The environment object we work with here is the ```GenContext```, so I want to let ```TypeAbbrevDeclaration``` add the binding information into it. However this seems not work since the  ```TypeGenContext``` doesn't have any method like ```CoreWyvernIL.ValueType lookupType(string typeName)```. What it restores is a ```objName``` and ```typename```.
 
-Any suggestion here?
+I think I can finally get it work in my way, but it will definitely change a lot of code and destroy the current design. Do I misunderstand the design, any suggestion?
