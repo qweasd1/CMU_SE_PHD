@@ -67,3 +67,74 @@ The test works fine. My trouble came when I want to let ```ILTests.testTypeAbbre
 I want to use the same solution I used before. The environment object we work with here is the ```GenContext```, so I want to let ```TypeAbbrevDeclaration``` add the binding information into it. However this seems not work since the  ```TypeGenContext``` doesn't have any method like ```CoreWyvernIL.ValueType lookupType(string typeName)```. What it restores is a ```objName``` and ```typename```.
 
 I think I can finally get it work in my way, but it will definitely change a lot of code and destroy the current design. Do I misunderstand the design, any suggestion?
+
+
+
+##### more analysis
+I also try when I remove the type alias in unit test ```ILTests.testTypeAbbrev()``` like the following:
+```java
+@Category(CurrentlyBroken.class)
+	public void testTypeAbbrev() throws ParseException {
+		String input = "val i : system.Int = 5\n\n" +
+			       "i\n"
+				     ;
+		TypedAST ast = TestUtil.getNewAST(input);
+		// bogus "system" entry, but makes the text work for now
+		GenContext genCtx = GenContext.empty().extend("system", new Variable("system"), null);
+		Expression program = ast.generateIL(genCtx);
+    	TypeContext ctx = TypeContext.empty();
+		ValueType t = program.typeCheck(ctx);
+		Assert.assertEquals(Util.intType(), t);
+		Value v = program.interpret(EvalContext.empty());
+    	IntegerLiteral five = new IntegerLiteral(5);
+		Assert.assertEquals(five, v);
+	}
+```
+though it can work, but when I debug it, I saw inside class ```ValDeclaration```, the logic here doesn't set ```declaredType``` since the parameter ```type``` is not ```UnresolvedType```. It's a ```QualifiedType```
+```java
+//inside wyvern.tools.typedAST.core.declarations.ValDeclaration
+public ValDeclaration(String name, Type type, TypedAST definition, FileLocation location) {
+		if (type instanceof UnresolvedType) {
+			UnresolvedType t = (UnresolvedType) type;
+			
+			// System.out.println("t = " + t);
+			
+			TaggedInfo tag = TaggedInfo.lookupTagByType(t); // FIXME:
+			
+			// System.out.println("tag = " + tag);
+			
+			// if (tag != null) {
+				//doing a tagged type
+				ti = tag;
+				
+				variableName = name;
+				
+				declaredType = type; // Record this.
+				
+				//type = null;
+			// }
+
+		}
+		
+		this.definition=definition;
+		binding = new NameBindingImpl(name, type);
+		this.location = location;
+	}
+```
+
+so, when we generate corewyvernIL's AST from TypedAST for the statement ```val i : system.Int = 5```, we go into the second branch in the following branch:
+```java
+//inside wyvern.tools.typedAST.core.declarations.ValDeclaration
+private ValueType getILValueType(GenContext ctx) {
+		ValueType vt;
+		if (declaredType != null) {
+		
+			vt = declaredType.getILType(ctx);
+		} else {
+			// [here]: we go this branch
+			vt = definition.generateIL(ctx).typeCheck(ctx);
+		}
+		return vt;
+	}
+```
+this means, we actually ignore the declaredType totally and use the definition to inference the corewyvernIL type here. which means we ignore the ```system.Int``` inside the  ```val i : system.Int = 5```. This makes me confused...
