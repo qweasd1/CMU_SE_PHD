@@ -63,15 +63,35 @@ var a:A = new
 As I think, we can start with the simple check which only accept delegation target with same type or subtype of delegation source 
 @Professor Jonathan, any suggestion?
 
-* 
-* 
-* Any
-One thing
+* Is it possible to have multi-delegation logic inside one object? for example:
+```
+type A
+    def m1():int
+type B
+    def m2():int
 
-### My plan to add delegate support 
+type C implements A,B
+    def m1():int
+    def m2():int
+
+val a:A = new
+    def m1():int = 1
+    
+val b:B = new
+    def m2():int = 2
+    
+var c: C = new
+    delegate A to a
+    delegate B to b
+    
+```
+As I think this can be useful, the underlying philosophy is just like traits for Scala. 
+@Professor Jonathan, any suggestions on this point? I will start my work with single delegation but, will we finally choose to use multi-delegation?
+
+
 
 
 
 
 ### Other questions:
-what does ```selfName``` mean in ```wyvern.target.corewyvernIL.expression.New```?
+what does the purpose of field ```selfName``` in ```wyvern.target.corewyvernIL.expression.New```?
