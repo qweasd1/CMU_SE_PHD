@@ -43,12 +43,12 @@ Here we declare another instance of ```IntResult``` type. But we delegate its fu
 
 Do I understood it correct?
 
-
-##### More questions on ```delegate```
+__________________________________________
+### More questions on ```delegate```
 
 ##### [#Q4]: how do we do typecheck on delegateDeclaration?
 
-* What's the rule to check and determine  whether an object can be the target of a delegation? In our unit test, we delegate the implmentation of ```IntResult``` object ```r2``` to another ```IntResult``` object ```r```. They are in the same type, so we fullfill our delegation semantic. We can also delegate implmentation of ```Some Type``` object to ```Some Type```'s subclass. We might can also allow delegate implementation of  ```Some Type```'s object to ```Another Type```'s object where ```Some Type``` has no hierarchy relationship with ```Another Type```, but ```Another Type```'s methods has a subset to fullfill all methods required in the ```Some Type```. We can give a explicit mapping to map the delegation relationship between the 2 object. Here is a sample:
+What's the rule to check and determine  whether an object can be the target of a delegation? In our unit test, we delegate the implmentation of ```IntResult``` object ```r2``` to another ```IntResult``` object ```r```. They are in the same type, so we fullfill our delegation semantic. We can also delegate implmentation of ```Some Type``` object to ```Some Type```'s subclass. We might can also allow delegate implementation of  ```Some Type```'s object to ```Another Type```'s object where ```Some Type``` has no hierarchy relationship with ```Another Type```, but ```Another Type```'s methods has a subset to fullfill all methods required in the ```Some Type```. We can give a explicit mapping to map the delegation relationship between the 2 object. Here is a sample:
 ```
 type A
    def method_1(): int
@@ -66,7 +66,8 @@ var a:A = new
 As I think, we can start with the simple check which only accept delegation target with same type or subtype of delegation source 
 @Professor Jonathan, any suggestion?
 
-* Is it possible to have multi-delegation logic inside one object? for example:
+##### [#Q5]: multi-delegation?
+Is it possible to have multi-delegation logic inside one object? for example:
 ```
 type A
     def m1():int
