@@ -98,5 +98,5 @@ As I think this can be useful, the underlying philosophy is just like traits for
 
 
 
-### Other questions:
+### [Ignore this]Other questions:
 what does the purpose of field ```selfName``` in ```wyvern.target.corewyvernIL.expression.New```?
