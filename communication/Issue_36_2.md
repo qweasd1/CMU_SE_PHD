@@ -7,7 +7,7 @@ ________________
 
 ##### for ```wyvern.target.corewyvernIL.expression.ObjectValue```, add logic for delegate
 ________________
-* **if the ObjectValue has delegate target, here is my plan to resolve the method-invoke and field-get. If the method/field define only in target object or the new object, we use it. If the method/field define both in target object and the new object we use the definition in new object.**
+* **if the ObjectValue has delegate target, here is my plan to resolve the method-invoke and field-get. If the method/field define only in target object or the new object, we use it. If the method/field define both in target object and the new object we use the definition in new object.** @Professor Jonathan, do you think it's fine here?
 * I will assume we only consider single delegate here, by now
 
 
