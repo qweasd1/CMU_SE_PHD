@@ -1,7 +1,10 @@
 ### Detail Plan
 
-##### Single Delegation in this iteration
-For multi-delegate, we need to consider more on method conflict(same situation in Scala's multi-trait). Though they are not difficult to implement, as I think, it needs to think carefully for every details for the whole function. So won't introduce the complexity in this iteration.
+##### Single Delegate in this iteration
+I plan to implement single Delegate in this iteration since multi-delegate is much more complex. 
+I want to For multi-delegate, we need to consider more on method mapping(same situation in Scala's multi-trait).
+
+It requires to think carefully for every details for the whole function. So won't introduce the complexity in this iteration.
 
 ##### delegate mapping
 
