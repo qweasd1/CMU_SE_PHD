@@ -3,6 +3,8 @@
 ##### Single Delegation in this iteration
 For multi-delegate, we need to consider more on method conflict(same situation in Scala's multi-trait). Though they are not difficult to implement, as I think, it needs to think carefully for every details for the whole function. So won't introduce the complexity in this iteration.
 
+##### delegate mapping
+
 ##### method override
 
 ##### reference the new delegate inside the code(so delegate Declaration will transformed into to a val declaration)
