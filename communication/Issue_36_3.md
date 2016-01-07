@@ -23,7 +23,7 @@ var o2: A = new
   
 ```
 * check if the name conflict with existing declarations
-* 
+* will add a new unit test for this situation
 
 ##### 
 
