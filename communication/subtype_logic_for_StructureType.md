@@ -10,7 +10,7 @@ The core logic for the ```isSubtypeOf`` method is as following:
 			}
 		}
 ```
-And the final result is rely on ```DeclType```'s ```isSubtypeOf(...)``` method. And in ```wyvern.target.corewyvernIL.decltype.DefDeclType```'s ```isSubtypeOf(...)``` logic as the following
+And the final result is rely on ```DeclType```'s ```isSubtypeOf(...)``` method. And in ```wyvern.target.corewyvernIL.decltype.DefDeclType```'s ```isSubtypeOf(...)``` method:
 ```java
 public boolean isSubtypeOf(DeclType dt, TypeContext ctx) {
 		if (!(dt instanceof DefDeclType)) {
@@ -28,9 +28,39 @@ public boolean isSubtypeOf(DeclType dt, TypeContext ctx) {
 			&& this.getRawResultType().isSubtypeOf(ddt.getRawResultType(), ctx);
 	}
 ```
-we can see for both arguments' type and result's type we use ```isSubtypeOf(...)``` method. Here I thought it might have some issue.
+we can see for both arguments' type and result's type we use ```isSubtypeOf(...)``` method. As I think, it might have some issue if we do it this way.a
 Considering the following example:
 ```
+type A
+  def m1():int
+  
+type B
+  def m1():int
+  def m2():int
+  
+// here type B's structualType should be the subType of type A's structuralType
 
+type C
+  def m(p:A):int
+  
+type D
+  def m(p:B):int
+  
+// here type D's structuralType should also be the subType of type C's structuralType
+
+// now if we assign a objectValue of type D to a variable declared as type C
+val o1:D = new 
+  def m(p:B):int
+     return p.m2()
+
+val o2:C = o1
+// it can pass our typecheck, however, when we called method m(...) on o2, we actually call the m(p:B):int define in o1. If we pass in object of type A as following
+
+var _p:A = new
+  def m1():int
+    return 1
+o2.m(_p)
+
+//we will get an error since _p doesn't have a method defined as m2 which is needed in o1's m(p:B)'s definition
 ```
-
+Any suggestions on this?
