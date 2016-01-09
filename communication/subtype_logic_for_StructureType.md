@@ -1,7 +1,7 @@
 ### The logic of ```isSubtypeOf(...)``` of ```wyvern.target.corewyvernIL.type.StructuralType```
 When I reading the logic of ```isSubtypeOf(...)``` of ```wyvern.target.corewyvernIL.type.StructuralType```, I found the logic is a little confusion for me. Not sure if it's my misunderstanding or there are mistake in the code. Hope you could help guide on this.
 
-The core logic for the ```isSubtypeOf`` method of ```wyvern.target.corewyvernIL.type.StructuralType``` is as following:
+The core logic for the ```isSubtypeOf``` method of ```wyvern.target.corewyvernIL.type.StructuralType``` is as following:
 ```java
     StructuralType st = (StructuralType) t;
 		st = (StructuralType) st.adapt(new ReceiverView(new Variable(st.selfName), new Variable(selfName)));
