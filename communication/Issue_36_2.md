@@ -19,3 +19,7 @@ _________________
 ##### for ```wyvern.target.corewyvernIL.expression.New```
 * modify method ```typeCheck(...)``` to let it compatible with delegate declaration
 * modify method ```interpret(...)``` to let it return the new version of ```wyvern.target.corewyvernIL.expression.ObjectValue```
+
+
+##### for ```wyvern.tools.typedAST.core.expressions.New```
+* modify method ```generateIL(...)``` to generate correct expectedType
