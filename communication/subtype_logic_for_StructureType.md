@@ -1,8 +1,12 @@
 ### The logic of ```isSubtypeOf(...)``` of ```wyvern.target.corewyvernIL.type.StructuralType```
-When I reading the logic of ```isSubtypeOf(...)``` of ```wyvern.target.corewyvernIL.type.StructuralType```, I found the logic is a little confusion for me. Not sure if it's my misunderstanding or the there are mistake in the code. Hope you could help guide on this.
+When I reading the logic of ```isSubtypeOf(...)``` of ```wyvern.target.corewyvernIL.type.StructuralType```, I found the logic is a little confusion for me. Not sure if it's my misunderstanding or there are mistake in the code. Hope you could help guide on this.
 
-The core logic for the ```isSubtypeOf`` method is as following:
+The core logic for the ```isSubtypeOf`` method of ```wyvern.target.corewyvernIL.type.StructuralType``` is as following:
 ```java
+    StructuralType st = (StructuralType) t;
+		st = (StructuralType) st.adapt(new ReceiverView(new Variable(st.selfName), new Variable(selfName)));
+		
+		TypeContext extendedCtx = ctx.extend(selfName, this);
     for (DeclType dt : st.declTypes) {
 			DeclType candidateDT = findDecl(dt.getName(), ctx);
 			if (candidateDT == null || !candidateDT.isSubtypeOf(dt, extendedCtx)) {
@@ -10,7 +14,7 @@ The core logic for the ```isSubtypeOf`` method is as following:
 			}
 		}
 ```
-And the final result is rely on ```DeclType```'s ```isSubtypeOf(...)``` method. And in ```wyvern.target.corewyvernIL.decltype.DefDeclType```'s ```isSubtypeOf(...)``` method:
+And the final result is rely on ```DeclType```'s ```isSubtypeOf(...)``` method. In ```wyvern.target.corewyvernIL.decltype.DefDeclType```'s ```isSubtypeOf(...)``` method:
 ```java
 public boolean isSubtypeOf(DeclType dt, TypeContext ctx) {
 		if (!(dt instanceof DefDeclType)) {
@@ -28,7 +32,7 @@ public boolean isSubtypeOf(DeclType dt, TypeContext ctx) {
 			&& this.getRawResultType().isSubtypeOf(ddt.getRawResultType(), ctx);
 	}
 ```
-we can see for both arguments' type and result's type we use ```isSubtypeOf(...)``` method. As I think, it might have some issue if we do it this way.a
+we can see for both arguments' type and result's type we use ```isSubtypeOf(...)``` method. As I think, it might have some issue if we do it this way.
 Considering the following example:
 ```
 type A
@@ -48,13 +52,14 @@ type D
   
 // here type D's structuralType should also be the subType of type C's structuralType
 
-// now if we assign a objectValue of type D to a variable declared as type C
+// now if we assign a objectValue of type D to a variable declared as type C as following
 val o1:D = new 
   def m(p:B):int
+    // here we use m2() method
      return p.m2()
 
 val o2:C = o1
-// it can pass our typecheck, however, when we called method m(...) on o2, we actually call the m(p:B):int define in o1. If we pass in object of type A as following
+// it can pass our typecheck. However, when we called method m(...) on o2, from the type definition of type A, we should use the signature m(p:A), but actually we call the m(p:B):int define in o1. When we  we pass in object of type A as following
 
 var _p:A = new
   def m1():int
