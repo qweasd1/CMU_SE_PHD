@@ -14,8 +14,10 @@ The core logic for the ```isSubtypeOf``` method of ```wyvern.target.corewyvernIL
 			}
 		}
 ```
-And the final result is rely on ```DeclType```'s ```isSubtypeOf(...)``` method. In ```wyvern.target.corewyvernIL.decltype.DefDeclType```'s ```isSubtypeOf(...)``` method:
+And the final result is rely on ```DeclType```'s ```isSubtypeOf(...)``` method. In ```wyvern.target.corewyvernIL.decltype.DefDeclType```'s ```isSubtypeOf(...)``` method(see the following):
 ```java
+//wyvern.target.corewyvernIL.decltype.DefDeclType's isSubtypeOf(...) method
+
 public boolean isSubtypeOf(DeclType dt, TypeContext ctx) {
 		if (!(dt instanceof DefDeclType)) {
 			return false;
@@ -24,11 +26,13 @@ public boolean isSubtypeOf(DeclType dt, TypeContext ctx) {
 		if (args.size() != ddt.args.size())
 			return false;
 		for (int i = 0; i < args.size(); ++i) {
+		        //argument
 			if (! (ddt.args.get(i).getType().isSubtypeOf(args.get(i).getType(), ctx))) {
 				return false;
 			}
 		}
 		return ddt.getName().equals(getName())
+		        // resultType
 			&& this.getRawResultType().isSubtypeOf(ddt.getRawResultType(), ctx);
 	}
 ```
@@ -42,8 +46,9 @@ type B
   def m1():int
   def m2():int
   
-// here type B's structualType should be the subType of type A's structuralType
+// here type B's structualType should be the subType of type A's structuralType using our existing typecheck logic
 
+// then we define another 2 types which use type A and type B
 type C
   def m(p:A):int
   
@@ -52,14 +57,14 @@ type D
   
 // here type D's structuralType should also be the subType of type C's structuralType
 
-// now if we assign a objectValue of type D to a variable declared as type C as following
+// now if we assign a variable of type D to a variable declared as type C as following
 val o1:D = new 
   def m(p:B):int
     // here we use m2() method
      return p.m2()
 
 val o2:C = o1
-// it can pass our typecheck. However, when we called method m(...) on o2, from the type definition of type A, we should use the signature m(p:A), but actually we call the m(p:B):int define in o1. When we  we pass in object of type A as following
+// it can pass our typecheck. However, when we called method m(...) on o2, from the type definition of type A, we should use the method signature m(p:A), but actually we call the m(p:B):int defined in o1. When we  we pass in object of type A as following
 
 var _p:A = new
   def m1():int
