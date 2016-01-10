@@ -38,3 +38,7 @@ Now I think I'm alreay familiar with the frontend of Wyvern, the typeSystem, I h
 
 
 ### interesting parts
+
+
+### the Grammar for the language we used to describe the grammar of the language. (it's variant of the standard BNF, but I there are some notation I don't know the meaning)
+https://github.com/wyvernlang/docs/blob/master/vm/vm-spec.pdf
