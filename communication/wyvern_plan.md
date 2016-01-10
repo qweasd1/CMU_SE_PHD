@@ -31,14 +31,27 @@ def getCustomer(~)
 ### 
 Now I think I'm alreay familiar with the frontend of Wyvern, the typeSystem, I hope I could touch more on the backend of Wyvern. Though I can do this by reading the unit test for these, hope there could be some starter questions you rasied like Issue #35 and #36.
 
+
+
+
+
 ### Wyvern's Common things
 
 
 ### Wyvern's Unique things
 
+### Wyvern has many different goals as I see
+For Mobile and Architecture
+
 
 ### interesting parts
+* working with DSL parts. (http://www.cs.cmu.edu/~aldrich/papers/ecoop14-tsls.pdf)
+* when working the module system
+* LLVM part. I seldom touch the backend part of compiler. 
+* Refactor and quick fix design.
+* The Big plan for Wyvern this year
 
+### Plan for this year's students
 
 ### the Grammar for the language we used to describe the grammar of the language. (it's variant of the standard BNF, but I there are some notation I don't know the meaning)
 https://github.com/wyvernlang/docs/blob/master/vm/vm-spec.pdf
