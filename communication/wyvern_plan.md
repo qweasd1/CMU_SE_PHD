@@ -1,4 +1,33 @@
-Before working on next issues,
-Do I have the honor to know the future plan for this year? 
+### Wyvern 
+### A short description of my project experience
+Every time, when I working on a new project, I will always think 2 questions. One is what makes this project unique from other projects, the other is what aspects in this project is common among other other projects.  On one hand, the second question can help me rapidly map my existing knowledge on other domain to the new domain I'm facing. On the other hand, the first question help me think deeply every aspects the unique feature I want to develop, including its benefits and its implementation difficulty. 
 
-To be frank I touch limit thing with the back-end of compiler, for example for the optimization, so I wish I could learn these part in my spare time.
+After I think these 2 questions I will try to pick up the feature
+
+For the prototype, I always do 2 things, one is to implement my idea to let it work in real world, the other one is I will evluate the domain model I design for my features again and again to see if it's well suit for my current and potential future needs.
+
+I always find the first 2,3 three of my prototype is not for production used. They are usually used to help me become more clearly on what features I want in this software and figure out the real problem in architecture, object design and implementation difficulty. As I think, in this phase, the most important thing is not to complete a full-feature product but to make ourselves more clearly about what kinds of domain model we are going to design, which means, we could actually skip some type check code in prototype! 
+
+Once I figure out what I need, I will start to make a list of the function I need and mapping them to a suit of unit test. Then I will develop the final version of the production.
+
+In the next few sections I'd like to apply my experience on Wyvern project, they are just some ideas, feel free to read them :)  
+
+### What makes Wyvern unique!
+
+
+### What features in Wyvern are also shared by many other language? 
+
+### Some aspects are important and will affect the domain model we used in Wyvern
+
+
+### Some features I feel vague might need some guide
+
+### 
+Now I think I'm alreay familiar with the frontend of Wyvern, the typeSystem, I hope I could touch more on the backend of Wyvern. Though I can do this by reading the unit test for these, hope there could be some starter questions you rasied like Issue #35 and #36.
+
+### Wyvern's Common things
+
+
+### Wyvern's Unique things
+
+
