@@ -20,8 +20,10 @@ I'm interesting in this part since I'm involed in several complex projects durin
 
 ### [Q5] Wyvern implementation
 Finally, share some of my ideas on Wyvern impelmentation:
-* will we consider the IDE support like code highlight, auto-completion, auto-fix, friendly error report etc. I think a wide-spread
+* will we consider the IDE support like code highlight, auto-completion, auto-fix, friendly error report etc. I think a widespread language can't miss the IDE support. For every popular JVM language, we had the a well-design eclipse plugin for it! But considering the these feature, we need to think the stucture design of our AST. For instance, if we want to add refactor function, we absolutely need to add this on TypedAST layer since it's more near the structure of source code than corewyvernIL's AST. Then we need to rethink our domain model design on TypedAST layer to see if it's good enough to hold these new functions. This is not a small work, but I hope I could have the opportunity to have a try on this to write a language-plugin for Wyvern on Eclipse.
+* removing the unused code. For example, are the typeCheck methods on TypedAST still in used? I guess the logic is already moved to the corewyvernIL layer. Maybe we could remove these unused functions along with their unit tests!
+* 
 
-
+## ...TO BE CONTINUE...
 
 
