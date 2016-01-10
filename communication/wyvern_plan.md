@@ -12,8 +12,14 @@ Once I figure out what I need, I will start to make a list of the function I nee
 
 In the next few sections I'd like to apply my experience on Wyvern project, they are just some ideas, feel free to read them :)  
 
-### What makes Wyvern unique!
+### What makes Wyvern unique thing
+For Wyvern, the most important unique thing might be it can host different DSLs inside it! Then a question just came into my mind, How we interpret these different DSLs? It's easy for us to define the syntax grammar and parsing the DSLs, but how we define the correct behavior of these DSLs?
 
+for example:
+```
+def getCustomer(~)
+  
+```
 
 ### What features in Wyvern are also shared by many other language? 
 
@@ -31,3 +37,4 @@ Now I think I'm alreay familiar with the frontend of Wyvern, the typeSystem, I h
 ### Wyvern's Unique things
 
 
+### interesting parts
