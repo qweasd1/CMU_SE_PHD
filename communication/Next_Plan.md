@@ -1,0 +1,2 @@
+### About the backend of Wyvern
+During the past few weeks, I spent most of my time on Wyvern's frontend part including the lexer and parser. I also read the TypedAST layer and corewyvernIL. I used to work on several projects focus on compiler frontend technology so they are not quite difficult for me. But for backend, it's my first time to work on them. Hope you could suggest where should I start on this part. 
