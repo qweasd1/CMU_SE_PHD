@@ -33,4 +33,4 @@ List Formals_TypeOptional() :
 
 ```
 
-Do I understand correct?
+Do I understand correctly?
