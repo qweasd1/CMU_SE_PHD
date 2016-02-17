@@ -16,14 +16,14 @@ some_lambda t = (x)=> a + x
 So here, our lambda expression ```t``` should only capture ```a``` and ignore ```b```. Is that correct?
 
 
-### Closure Implemented in C#
-As I know, the C# compiler usually compiles lambda expression with free variables as the following shows:
+### Closure Implemented in CSharp
+As I know, the C# compiler compiles lambda expression with free variables in the following way:
 ```
 // the same lambda expression
 int a = 1;
 Func<int,int> a_lambda = (x)=> x + a;
 
-// after compiled
+// the compiler generate an annoymous_class for that lambda expression
 class an_annoymous_class {
   private int a = 1;
   public int apply(int x){
@@ -31,4 +31,9 @@ class an_annoymous_class {
   }
 }
 ```
-As we can see the the C# compiler actually capture the free variable ```a``` and store it as a field in the genreated annoymous class.
+The C# compiler capture the free variable ```a``` and store it as a field in the generated annoymous class. I think we can also do this in Wyvern.
+
+### My plan
+We can modify the ```generateIL()``` method in ```wyvern.tools.typedAST.core.expressions.Fn``` to let it generate ```wyvern.target.corewyvernIL.expression.New``` with fields that capture the free variables in lambda expression similar as C# compiler. 
+
+Any suggestions? If you feel good with it, I will start to implement.
