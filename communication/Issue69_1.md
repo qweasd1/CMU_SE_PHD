@@ -19,19 +19,24 @@ So here, our lambda expression ```t``` should only capture ```a``` and ignore ``
 ### Closure Implemented in CSharp
 As I know, the C# compiler compiles lambda expression with free variables in the following way:
 ```
-// the same lambda expression
+// the original lambda expression
 int a = 1;
 Func<int,int> a_lambda = (x)=> x + a;
 
 // the compiler generate an annoymous_class for that lambda expression
-class an_annoymous_class {
-  private int a = 1;
+class annoymous_class {
+  public int a = 1;
   public int apply(int x){
     return x + a
   }
 }
+
+int a = 1;
+annoymous_class lambda = new annoymous_class();
+lambda.a = a;
+
 ```
-The C# compiler capture the free variable ```a``` and store it as a field in the generated annoymous class. I think we can also do this in Wyvern.
+Here, the C# compiler capture the free variable ```a``` and store it as a field in the generated annoymous class to let the apply class can only touch the free variable a. I think we can also do this in Wyvern.
 
 ### My plan
 We can modify the ```generateIL()``` method in ```wyvern.tools.typedAST.core.expressions.Fn``` to let it generate ```wyvern.target.corewyvernIL.expression.New``` with fields that capture the free variables in lambda expression similar as C# compiler. 
