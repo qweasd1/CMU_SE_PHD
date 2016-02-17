@@ -13,7 +13,7 @@ val b = 2
 
 some_lambda t = (x)=> a + x
 ```
-So here, our lambda expression ```t``` should only capture ```a``` and ignore ```b```. Is that correct?
+Here, our lambda expression ```t``` should only capture ```a``` and ignore ```b```. Is that correct?
 
 
 ### Closure Implemented in CSharp
@@ -32,13 +32,14 @@ class annoymous_class {
 }
 
 int a = 1;
+
 annoymous_class lambda = new annoymous_class();
 lambda.a = a;
 
 ```
-Here, the C# compiler capture the free variable ```a``` and store it as a field in the generated annoymous class to let the apply class can only touch the free variable a. I think we can also do this in Wyvern.
+Here, the C# compiler capture the free variable ```a``` and store it as a field in the generated annoymous class to let the apply class can only touch the free variable ```a```. I think we can use the same way in Wyvern.
 
 ### My plan
-We can modify the ```generateIL()``` method in ```wyvern.tools.typedAST.core.expressions.Fn``` to let it generate ```wyvern.target.corewyvernIL.expression.New``` with fields that capture the free variables in lambda expression similar as C# compiler. 
+We can modify the ```generateIL()``` method in ```wyvern.tools.typedAST.core.expressions.Fn``` to let it generate ```wyvern.target.corewyvernIL.expression.New``` with fields that capture the free variables. The fields will be ```ValDeclaration``` with initialization which set them to the right value.
 
 Any suggestions? If you feel good with it, I will start to implement.
